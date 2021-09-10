@@ -38,7 +38,7 @@ public class UsuariosControllers {
 		return usrServ.agregar_usuario(usr);
 	}
 	
-	@PutMapping("/usuario/{id}")
+	@PutMapping("/usuario")
 	@ApiOperation(value = "Actualiza registro de usuario")
 	public Map<String,?> actualizar_usuario(@RequestBody UsuarioRequest usr){
 		return usrServ.actualizar_usuario(usr);
@@ -56,7 +56,7 @@ public class UsuariosControllers {
 		return usrServ.buscar_por_id(id);
 	}
 	
-	@GetMapping("/usuarios/{username}")
+	@GetMapping("/usuario/{username}")
 	@ApiOperation(value = "Lista de usuario por username")
 	public Map<String,?> obtener_usuario_username(@PathVariable String username){
 		return usrServ.buscar_por_username(username);

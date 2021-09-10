@@ -2,7 +2,11 @@ package com.store.sysiems.services;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.store.sysiems.request.UsuarioRequest;
+
+
 
 public interface UsuarioService {
 	
