@@ -24,6 +24,7 @@ public class UsuariosEntity {
 	@Column(name = "id")
 	private Long id;
 	
+	@Column(name="nombre")
 	private String nombre;
 	
 	@Column(name = "apellido_paterno")
