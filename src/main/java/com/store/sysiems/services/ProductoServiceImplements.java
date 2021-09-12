@@ -1,5 +1,6 @@
 package com.store.sysiems.services;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.store.sysiems.dao.ExistenciasDao;
 import com.store.sysiems.dao.ProductoDao;
+import com.store.sysiems.entity.Existencias;
 import com.store.sysiems.entity.ProductoEntity;
 import com.store.sysiems.request.PorductoRequest;
 import com.store.sysiems.request.UsuarioRequest;
@@ -17,6 +20,9 @@ public class ProductoServiceImplements  implements ProductoService{
 
 	@Autowired
 	public ProductoDao productoDao;
+	
+	@Autowired
+	public ExistenciasDao existencias;
 	
 	@Override
 	public Map<String, ?> obtener_producto() {
@@ -37,11 +43,15 @@ public class ProductoServiceImplements  implements ProductoService{
 	@Override
 	public Map<String, ?> agregar_producto(PorductoRequest producto) {
 		// TODO Auto-generated method stub
+		Timestamp creado = new Timestamp(System.currentTimeMillis());
 		Map<String,Object> objMap = new HashMap<String, Object>();
-		ProductoEntity pro = new ProductoEntity(producto.getNombre(),producto.getTipo_producto(),producto.getCosto(),producto.getFecha());
+		ProductoEntity pro = new ProductoEntity(producto.getNombre(),producto.getTipo_producto(),producto.getCosto(),creado);
 		
 		productoDao.save(pro);
+		
 		//aqui se actualiza el numero de productos existentes
+		Existencias existEntity = new Existencias(producto.getTipo_producto());
+		existencias.save(existEntity);
 		objMap.put("Resultado","OK");
 	
 		objMap.put("Code", "00");

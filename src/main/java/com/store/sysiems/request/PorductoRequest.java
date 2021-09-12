@@ -14,5 +14,5 @@ public class PorductoRequest {
 	public String nombre;
 	public String tipo_producto;
 	public int costo;
-	public Timestamp fecha;
+	
 }
